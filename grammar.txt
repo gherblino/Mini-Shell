@@ -1,0 +1,16 @@
+<commandpart>       ::=     <commandname> <options>
+
+<commandlist>       ::=     <commandpart> '|' <commandlist>
+                     |      <commandpart>
+
+<io_redirection>    ::=     '<' <filename> '>' <filename>
+                     |      '>' <filename> '<' <filename>
+                     |      '>' <filename>
+                     |      '<' <filename>
+                     |      <empty>
+
+<command>           ::=     <commandlist> <io_redirection>
+
+<inputline>         ::=     <command> '&' <inputline>
+                     |      <command>
+                     |      <empty>

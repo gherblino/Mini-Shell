@@ -1,0 +1,22 @@
+%{
+#include <stdlib.h>
+#include "parser.tab.h"
+%}
+
+white           [ \t]+
+command         [^ "><&\|\0\n]+
+option          \"[^"]+\"
+
+%%
+{option}        { return(OPTION); }
+{white}         { }
+exit            { return(EXIT); }
+{command}       { return(COMMAND); }
+\n              { return(NEWLINE); }
+.               { return(yytext[0]); }
+
+%%
+
+int yywrap(void) {
+    return 1;
+}
